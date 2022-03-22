@@ -6,7 +6,7 @@ $quote->categoryId = $categoryId;
 // get quote by categoryId
 $result = $quote->read_category();
 
-   // get row count
+// get row count
 $num = $result->rowCount();
 
 // check if any quotes
@@ -30,12 +30,11 @@ if($num > 0) {
         array_push($quotes_arr, $quote_item);
     }
 
-       // convert to JSON and output
+    // convert to JSON and output
     echo json_encode($quotes_arr);
-    return true;
+
 } else {
     echo json_encode(
         array('message' => 'categoryId Not Found')
     );
-    return false;
 }

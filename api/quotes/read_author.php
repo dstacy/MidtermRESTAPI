@@ -32,13 +32,11 @@ if($num > 0) {
 
     // convert to JSON and output
     print_r(json_encode($quotes_arr));
-    // return true;
 
 } else {
     echo json_encode(
         array('message' => 'authorId Not Found')
     );
-    // return false;
 }
 
 

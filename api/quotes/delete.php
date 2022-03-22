@@ -1,6 +1,6 @@
 <?php
 
-// delete category
+// delete quote
 $quote->delete();
 
 // create array for JSON data

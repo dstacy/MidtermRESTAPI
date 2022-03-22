@@ -1,13 +1,13 @@
 <?php
 
-// set authorId to read
+// set authorId and categoryId to read
 $quote->authorId = $authorId;
 $quote->categoryId = $categoryId;
 
-// get quote by authorId
+// get quote by authorId and categoryId
 $result = $quote->read_authorAndCategory();
 
-   // get row count
+// get row count
 $num = $result->rowCount();
 
 // check if any quotes
@@ -31,12 +31,12 @@ if($num > 0) {
         array_push($quotes_arr, $quote_item);
     }
 
-       // convert to JSON and output
+    // convert to JSON and output
     echo json_encode($quotes_arr);
 
 } else {
     echo json_encode(
-        array('message' => 'authorId Not Found')
+        array('message' => 'Quote Not Found')
     );
 }
 

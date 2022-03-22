@@ -30,7 +30,7 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
         $quote->authorId = $data->authorId;
         $quote->categoryId = $data->categoryId;
 
-        // create author
+        // create quote
         $quote->create();
 
         // create array for JSON data
