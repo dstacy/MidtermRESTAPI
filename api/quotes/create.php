@@ -3,7 +3,6 @@
 include_once '../../models/Author.php';
 include_once '../../models/Category.php';
 
-
 // check if all parameters are present
 if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !property_exists($data, 'categoryId'))  {
     echo json_encode( 
@@ -11,16 +10,8 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
         );
 } else {
 
-    // set properties to create
-    $quote->quote = $data->quote;
-    $quote->authorId = $data->authorId;
-    $quote->categoryId = $data->categoryId;
-
     $author = new Author($db);
     $category = new Category($db);
-
-    // create author
-    $quote->create();
 
     if(!isValid($data->authorId, $author)) {
         echo json_encode( 
@@ -35,6 +26,14 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
             );
         return;
     }
+
+    // set properties to create
+    $quote->quote = $data->quote;
+    $quote->authorId = $data->authorId;
+    $quote->categoryId = $data->categoryId;
+
+    // create author
+    $quote->create();
 
     // create array for JSON data
     $quote_arr = array (
