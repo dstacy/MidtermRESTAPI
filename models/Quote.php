@@ -284,7 +284,6 @@ public function read_authorAndCategory() {
     }
 
     // delete 
-
     public function delete() {
          // create query
         $query = 'DELETE FROM ' . $this->table . '
