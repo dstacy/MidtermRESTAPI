@@ -54,6 +54,7 @@ class Author {
         try {
             // execute query
             $stmt->execute();
+
             // fetch array
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -61,10 +62,8 @@ class Author {
                 // set properties
                 $this->id = $row['id'];
                 $this->author = $row['author'];
-        
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         } catch (Exception $e) {
@@ -128,14 +127,6 @@ class Author {
                 array('message' => $e->getmessage())
             );
         }
-
-        /*
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-        */
     }
 
     // delete author
@@ -162,13 +153,5 @@ class Author {
                 array('message' => $e->getmessage())
             );
         }
-
-        /*
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-        */
     }
 }

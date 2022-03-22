@@ -22,17 +22,18 @@ class Category {
             category
             FROM ' . $this->table;
                 
-            // prepared statement
-            $stmt = $this->conn->prepare($query);
-            try {
-                // execute query
-                $stmt->execute();
-                return $stmt;
-            } catch(Exception $e) {
-                echo json_encode(
-                    array('message' => $e->getmessage())
-                );
-            }
+        // prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        try {
+            // execute query
+            $stmt->execute();
+            return $stmt;
+        } catch(Exception $e) {
+            echo json_encode(
+                array('message' => $e->getmessage())
+            );
+        }
     }
 
     // get single category
@@ -67,7 +68,6 @@ class Category {
             } else {
                 return false;
             }
-
         } catch (Exception $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
@@ -75,7 +75,7 @@ class Category {
         }
     }
 
-    // Create Author
+    // Create category
     public function create() {
         // create query
         $query = 'INSERT INTO ' . $this->table . '
@@ -97,12 +97,6 @@ class Category {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
-        }
-
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -135,19 +129,11 @@ class Category {
                 array('message' => $e->getmessage())
             );
         }
-
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    
     }
 
     // delete category
-
     public function delete() {
-         // create query
+        // create query
         $query = 'DELETE FROM ' . $this->table . '
             WHERE id = :id';
 
@@ -168,12 +154,6 @@ class Category {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
-        }
-
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
         }
     }
 }
