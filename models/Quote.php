@@ -1,53 +1,55 @@
 <?php
-    class Quote {
-        private $conn;
-        private $table = 'quotes';
 
-        public $id;
-        public $quote;
-        public $authorId;
-        public $categoryId;
+class Quote {
+    private $conn;
+    private $table = 'quotes';
 
-        // Constructor
-        public function __construct($db) {
-            $this->conn = $db;
-        }
+    public $id;
+    public $quote;
+    public $authorId;
+    public $categoryId;
 
-        // method to get posts
-        public function read() {
-            // create query
-            $query = 'SELECT 
-                c.category AS category, 
-                q.id, 
-                q.categoryId, 
-                a.author AS author, 
-                q.authorId,
-                q.quote
-                FROM 
-                    ' . $this->table . ' q
-                LEFT JOIN 
-                    categories c ON q.categoryId = c.id
-                LEFT JOIN 
-                    authors a ON q.authorId = a.id
-                ORDER BY 
-                    q.id';
+    // Constructor
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    // method to get posts
+    public function read() {
+        // create query
+        $query = 'SELECT 
+            c.category AS category, 
+            q.id, 
+            q.categoryId, 
+            a.author AS author, 
+            q.authorId,
+            q.quote
+            FROM 
+                ' . $this->table . ' q
+            LEFT JOIN 
+                categories c ON q.categoryId = c.id
+            LEFT JOIN 
+                authors a ON q.authorId = a.id
+            ORDER BY 
+                q.id';
                 
-    
             // prepared statement
             $stmt = $this->conn->prepare($query);
+
             try {
                 // execute query
                 $stmt->execute();
                 return $stmt;
-                } catch(PDOException $e) {
-                    echo json_encode(
-                        array('message' => $e->getmessage())
-                    );
-                }
+            } catch(PDOException $e) {
+                echo json_encode(
+                    array('message' => $e->getmessage())
+                );
+            }
     }
 
     // get single quote from quote id
     public function read_single() {
+        // create query
         $query = 'SELECT 
                 c.category AS category, 
                 q.id, 
@@ -72,32 +74,33 @@
         $stmt->bindParam(1, $this->id);
 
         try {
-        // execute query
-        $stmt->execute();
+            // execute query
+            $stmt->execute();
 
-        // fetch array
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // fetch array
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
             
-        if($row) {
-        // set properties
-        $this->id = $row['id'];
-        $this->quote = $row['quote'];
-        $this->author = $row['author'];
-        $this->category = $row['category'];
+            if($row) {
+            // set properties
+            $this->id = $row['id'];
+            $this->quote = $row['quote'];
+            $this->author = $row['author'];
+            $this->category = $row['category'];
 
-        return true;
-        } else {
-            return false;
-        }
+            return true;
+            } else {
+                return false;
+            }
         } catch (PDOException $e) {
             echo json_encode(
-            array('message' => $e->getmessage())
-        );
+                array('message' => $e->getmessage())
+            );
         }
     }
 
     // get quotes from authorId
     public function read_author() {
+        // create query
         $query = 'SELECT 
                 c.category AS category, 
                 q.id, 
@@ -121,19 +124,20 @@
         $stmt->bindParam(1, $this->authorId);
         
         try{
-        // execute query
-        $stmt->execute();
-        return $stmt;
+            // execute query
+            $stmt->execute();
+            return $stmt;
         } catch (PDOException $e) {
             echo json_encode(
-            array('message' => $e->getmessage())
-        );
+                array('message' => $e->getmessage())
+            );
         }
     }
     
 
 // get quotes from cagtegoryId
 public function read_category() {
+    // create query
     $query = 'SELECT 
             c.category AS category, 
             q.id, 
@@ -157,18 +161,19 @@ public function read_category() {
     $stmt->bindParam(1, $this->categoryId);
     
     try{
-    // execute query
+        // execute query
         $stmt->execute();
         return $stmt;
     } catch (PDOException $e) {
         echo json_encode(
-        array('message' => $e->getmessage())
-    );
+            array('message' => $e->getmessage())
+        );
     }
 }
 
 // get quotes from combination of authorId and cagtegoryId
 public function read_authorAndCategory() {
+    // create query
     $query = 'SELECT 
             c.category AS category, 
             q.id, 
@@ -193,17 +198,18 @@ public function read_authorAndCategory() {
     $stmt->bindParam(2, $this->categoryId);
     
     try{
-    // execute query
+        // execute query
         $stmt->execute();
         return $stmt;
     } catch (PDOException $e) {
         echo json_encode(
-        array('message' => $e->getmessage())
-    );
+            array('message' => $e->getmessage())
+        );
     }
 }
     // Create quote
     public function create() {
+        // create query
         $query = 'INSERT INTO ' . $this->table . '
         SET
             quote = :quote,
@@ -262,19 +268,19 @@ public function read_authorAndCategory() {
         try {
             // execute
             $stmt->execute();
-            } catch(PDOException $e) {
-                $message = json_encode(
-                    array('message' => $e->getmessage())
-                );
+        } catch(PDOException $e) {
+            $message = json_encode(
+                array('message' => $e->getmessage())
+            );
 
-                return $message;
-            }
+            return $message;
+        }
     
-            if($stmt->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+        if($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // delete 
@@ -296,10 +302,10 @@ public function read_authorAndCategory() {
         try {
             // execute
             $stmt->execute();
-            } catch(PDOException $e) {
-                echo json_encode(
-                    array('message' => $e->getmessage())
-                );
-            }
+        } catch(PDOException $e) {
+            echo json_encode(
+                array('message' => $e->getmessage())
+            );
+        }
     }
 }

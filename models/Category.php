@@ -1,31 +1,33 @@
 <?php
-    class Category {
-        private $conn;
-        private $table = 'categories';
 
-        public $id;
-        public $category;
+class Category {
+    
+    private $conn;
+    private $table = 'categories';
+
+    public $id;
+    public $category;
         
 
-        // Constructor
-        public function __construct($db) {
-            $this->conn = $db;
-        }
+    // Constructor
+    public function __construct($db) {
+        $this->conn = $db;
+    }
 
-        // method to get categories
-        public function read() {
-            // create query
-            $query = 'SELECT 
-                id,
-                category
-                FROM ' . $this->table;
+    // method to get categories
+    public function read() {
+        // create query
+        $query = 'SELECT 
+            id,
+            category
+            FROM ' . $this->table;
                 
             // prepared statement
             $stmt = $this->conn->prepare($query);
             try {
-            // execute query
-            $stmt->execute();
-            return $stmt;
+                // execute query
+                $stmt->execute();
+                return $stmt;
             } catch(Exception $e) {
                 echo json_encode(
                     array('message' => $e->getmessage())
@@ -34,8 +36,8 @@
     }
 
     // get single category
-
     public function read_single() {
+        // create query
         $query = 'SELECT 
         id,
         category
@@ -51,20 +53,20 @@
         $stmt->bindParam(1, $this->id);
 
         try {
-        // execute query
-        $stmt->execute();
+            // execute query
+            $stmt->execute();
 
-        // fetch array
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // fetch array
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($row) {
-            // set properties
-            $this->id = $row['id'];
-            $this->category = $row['category'];
-            return true;
-        } else {
-            return false;
-        }
+            if($row) {
+                // set properties
+                $this->id = $row['id'];
+                $this->category = $row['category'];
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception $e) {
             echo json_encode(
@@ -75,7 +77,7 @@
 
     // Create Author
     public function create() {
-     
+        // create query
         $query = 'INSERT INTO ' . $this->table . '
             SET category = :category';
 
@@ -106,6 +108,7 @@
 
     // Update category
     public function update() {
+        // create query
         $query = 'UPDATE ' . $this->table . '
         SET
             category = :category 
@@ -125,8 +128,8 @@
         $stmt->bindParam(':category', $this->category);
         
         try {
-        // execute
-        $stmt->execute();
+            // execute
+            $stmt->execute();
         } catch(Exception $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
@@ -144,7 +147,6 @@
     // delete category
 
     public function delete() {
-
          // create query
         $query = 'DELETE FROM ' . $this->table . '
             WHERE id = :id';

@@ -1,41 +1,42 @@
 <?php
-    class Author {
-        private $conn;
-        private $table = 'authors';
 
-        public $id;
-        public $author;
+class Author {
+    private $conn;
+    private $table = 'authors';
 
-         // Constructor
-         public function __construct($db) {
-            $this->conn = $db;
-        }
+    public $id;
+    public $author;
+
+    // Constructor
+    public function __construct($db) {
+        $this->conn = $db;
+    }
         
-        // method to get authors
-        public function read() {
-            // create query
-            $query = 'SELECT 
-                id,
-                author
-                FROM ' . $this->table;
+    // method to get authors
+    public function read() {
+        // create query
+        $query = 'SELECT 
+            id,
+            author
+            FROM ' . $this->table;
                 
-            // prepared statement
-            $stmt = $this->conn->prepare($query);
+        // prepared statement
+        $stmt = $this->conn->prepare($query);
 
-            try {
-            // execute query
-            $stmt->execute();
-            return $stmt;
-            } catch(Exception $e) {
-                echo json_encode(
-                    array('message' => $e->getmessage())
-                );
+        try {
+        // execute query
+        $stmt->execute();
+        return $stmt;
+        } catch(Exception $e) {
+            echo json_encode(
+                array('message' => $e->getmessage())
+            );
             }
     }
 
     // get single author
-
     public function read_single() {
+        // create query
         $query = 'SELECT 
         id,
         author
@@ -75,7 +76,7 @@
 
     // Create Author
     public function create() {
-     
+        // create query
         $query = 'INSERT INTO ' . $this->table . '
             SET author = :author';
 
@@ -106,6 +107,7 @@
 
     // Update author
     public function update() {
+        // create query
         $query = 'UPDATE ' . $this->table . '
         SET
             author = :author 
@@ -125,13 +127,14 @@
         $stmt->bindParam(':author', $this->author);
         
         try {
-        // execute
-        $stmt->execute();
+            // execute
+            $stmt->execute();
         } catch(Exception $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
         }
+
         if($stmt->rowCount() > 0) {
             return true;
         } else {
@@ -140,9 +143,7 @@
     }
 
     // delete author
-
     public function delete() {
-
          // create query
         $query = 'DELETE FROM ' . $this->table . '
             WHERE id = :id';
