@@ -20,18 +20,18 @@ class Author {
             author
             FROM ' . $this->table;
                 
-        // prepared statement
+        // prepare statement
         $stmt = $this->conn->prepare($query);
 
         try {
-        // execute query
-        $stmt->execute();
-        return $stmt;
+            // execute query
+            $stmt->execute();
+            return $stmt;
         } catch(Exception $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
-            }
+        }
     }
 
     // get single author
@@ -52,21 +52,21 @@ class Author {
         $stmt->bindParam(1, $this->id);
 
         try {
-        // execute query
-        $stmt->execute();
-        // fetch array
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // execute query
+            $stmt->execute();
+            // fetch array
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if($row) {
-        // set properties
-        $this->id = $row['id'];
-        $this->author = $row['author'];
+            if($row) {
+                // set properties
+                $this->id = $row['id'];
+                $this->author = $row['author'];
         
-        return true;
-        }
-        else {
-            return false;
-        }
+                return true;
+            }
+            else {
+                return false;
+            }
         } catch (Exception $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
@@ -98,11 +98,13 @@ class Author {
             );
         }
 
+        /*
         if($stmt->rowCount() > 0) {
             return true;
         } else {
             return false;
         }
+        */
     }
 
     // Update author
