@@ -7,17 +7,17 @@ if(!property_exists($data, 'author')) {
         );
 } else {
     
-// set author to create
-$author->author = $data->author;
+    // set author to create
+    $author->author = $data->author;
 
-// create author
-$author->create();
+    // create author
+    $author->create();
 
-// create array for JSON data
-$author_arr = array (
-'id' => $db->lastInsertId(),
-'author' => $author->author
-);
+    // create array for JSON data
+    $author_arr = array (
+        'id' => $db->lastInsertId(),
+        'author' => $author->author
+    );
 
-print_r(json_encode($author_arr));
+    print_r(json_encode($author_arr));
 }
