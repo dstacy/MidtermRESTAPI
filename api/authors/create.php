@@ -6,6 +6,7 @@ if(!property_exists($data, 'author')) {
         array('message' => 'Missing Required Parameters')
         );
 } else {
+    
 // set author to create
 $author->author = $data->author;
 

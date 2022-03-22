@@ -230,13 +230,19 @@ public function read_authorAndCategory() {
         $stmt->bindParam(':authorId', $this->authorId);
         $stmt->bindParam(':categoryId', $this->categoryId);
 
+        // execute
         try{
-            $stmt->execute();  
+            $stmt->execute();    
         } catch(PDOException $e) {
-            $message = json_encode(
+            echo json_encode(
                 array('message' => $e->getmessage())
             );
-            return $message;
+        }
+
+        if($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 

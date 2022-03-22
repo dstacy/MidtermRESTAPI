@@ -3,13 +3,6 @@
 include_once '../../models/Author.php';
 include_once '../../models/Category.php';
 
-// set properties to create
-$quote->quote = $data->quote;
-$quote->authorId = $data->authorId;
-$quote->categoryId = $data->categoryId;
-
-$author = new Author($db);
-$category = new Category($db);
 
 // check if all parameters are present
 if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !property_exists($data, 'categoryId'))  {
@@ -17,6 +10,14 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
         array('message' => 'Missing Required Parameters')
         );
 } else {
+
+    // set properties to create
+    $quote->quote = $data->quote;
+    $quote->authorId = $data->authorId;
+    $quote->categoryId = $data->categoryId;
+
+    $author = new Author($db);
+    $category = new Category($db);
 
     // create author
     $quote->create();
@@ -36,11 +37,11 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
     }
 
     // create array for JSON data
-        $quote_arr = array (
-            'id' => $db->lastInsertId(),
-            'quote' => $quote->quote,
-            'authorId' => $quote->authorId,
-            'categoryId' => $quote->categoryId
+    $quote_arr = array (
+        'id' => $db->lastInsertId(),
+        'quote' => $quote->quote,
+        'authorId' => $quote->authorId,
+        'categoryId' => $quote->categoryId
         );
 
         print_r(json_encode($quote_arr));
