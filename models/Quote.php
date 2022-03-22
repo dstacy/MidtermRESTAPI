@@ -14,7 +14,7 @@ class Quote {
         $this->conn = $db;
     }
 
-    // method to get posts
+    // method to get quotes
     public function read() {
         // create query
         $query = 'SELECT 
@@ -81,13 +81,12 @@ class Quote {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             
             if($row) {
-            // set properties
-            $this->id = $row['id'];
-            $this->quote = $row['quote'];
-            $this->author = $row['author'];
-            $this->category = $row['category'];
-
-            return true;
+                // set properties
+                $this->id = $row['id'];
+                $this->quote = $row['quote'];
+                $this->author = $row['author'];
+                $this->category = $row['category'];
+                return true;
             } else {
                 return false;
             }
@@ -135,10 +134,10 @@ class Quote {
     }
     
 
-// get quotes from cagtegoryId
-public function read_category() {
-    // create query
-    $query = 'SELECT 
+    // get quotes from cagtegoryId
+    public function read_category() {
+        // create query
+        $query = 'SELECT 
             c.category AS category, 
             q.id, 
             q.categoryId, 
@@ -171,10 +170,10 @@ public function read_category() {
     }
 }
 
-// get quotes from combination of authorId and cagtegoryId
-public function read_authorAndCategory() {
-    // create query
-    $query = 'SELECT 
+    // get quotes from combination of authorId and cagtegoryId
+    public function read_authorAndCategory() {
+        // create query
+        $query = 'SELECT 
             c.category AS category, 
             q.id, 
             q.categoryId, 
@@ -221,7 +220,6 @@ public function read_authorAndCategory() {
 
         // clean data
         $this->quote = htmlspecialchars(strip_tags($this->quote));
-        // $this->author = htmlspecialchars(strip_tags($this->author));
         $this->authorId = htmlspecialchars(strip_tags($this->authorId));
         $this->categoryId = htmlspecialchars(strip_tags($this->categoryId));
 
@@ -237,12 +235,6 @@ public function read_authorAndCategory() {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
-        }
-
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -275,17 +267,14 @@ public function read_authorAndCategory() {
             // execute
             $stmt->execute();
         } catch(PDOException $e) {
-            $message = json_encode(
+            //$message = json_encode(
+            //    array('message' => $e->getmessage())
+            //);
+            echo json_encode(
                 array('message' => $e->getmessage())
             );
 
-            return $message;
-        }
-    
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
+            // return $message;
         }
     }
 
