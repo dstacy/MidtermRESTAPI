@@ -27,7 +27,7 @@ if($num > 0) {
     }
 
     // convert to JSON and output
-    print_r(json_encode($author_arr));
+    print_r(json_encode($authors_arr));
 
 } else {
     echo json_encode(
