@@ -97,14 +97,6 @@ class Author {
                 array('message' => $e->getmessage())
             );
         }
-
-        /*
-        if($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-        */
     }
 
     // Update author
@@ -137,11 +129,13 @@ class Author {
             );
         }
 
+        /*
         if($stmt->rowCount() > 0) {
             return true;
         } else {
             return false;
         }
+        */
     }
 
     // delete author
@@ -169,10 +163,12 @@ class Author {
             );
         }
 
+        /*
         if($stmt->rowCount() > 0) {
             return true;
         } else {
             return false;
         }
+        */
     }
 }
