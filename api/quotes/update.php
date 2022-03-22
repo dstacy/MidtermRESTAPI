@@ -42,4 +42,5 @@ if(!property_exists($data, 'id') || !property_exists($data, 'quote') || !propert
         );
     
         print_r(json_encode($quote_arr));
+    }
 }
