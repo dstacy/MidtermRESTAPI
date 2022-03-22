@@ -9,7 +9,7 @@ $num = $result->rowCount();
 // check if any authors
 if($num > 0) {
 
-    // crate empty author array
+    // create empty author array
     $authors_arr = array();
 
     // loop through all rows (results) and assign 

@@ -27,7 +27,7 @@
         }
 
         // convert to JSON and output
-        echo json_encode($category_arr);
+        print_r(json_encode($category_arr));
 
     } else {
         echo json_encode(
