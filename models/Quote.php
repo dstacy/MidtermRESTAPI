@@ -232,7 +232,7 @@ public function read_authorAndCategory() {
 
         try{
             $stmt->execute(); 
-            return $stmt;   
+            $this->id = $db->lastInsertId(),  
         } catch(PDOException $e) {
             $message = json_encode(
                 array('message' => $e->getmessage())
