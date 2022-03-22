@@ -8,6 +8,7 @@ if ($method === 'OPTIONS') {
     header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
 }
 
+// iclude files
 include_once '../../config/Database.php';
 include_once '../../models/Quote.php';
 include_once '../../functions/isValid.php';
@@ -19,7 +20,10 @@ $db = $database->connect();
 // instantiate quote object
 $quote = new Quote($db);
 
+// get raw JSON data
 $data = json_decode(file_get_contents("php://input"));
+
+// declare variables for isset
 $id;
 $authorId;
 $categoryId;
@@ -41,50 +45,50 @@ if(isset($_GET['categoryId'])) {
     $categoryId = $_GET['categoryId'];
 }
 
-    switch($method) {
-        case "POST":
-            include_once 'create.php';
-            break;
-        case "GET":
-            if(isset($id)) {
-                if(!$quoteExists) {
-                    echo json_encode( 
+switch($method) {
+    case "POST":
+        include_once 'create.php';
+        break;
+    case "GET":
+        if(isset($id)) {
+            if(!$quoteExists) {
+                echo json_encode( 
                     array('message' => 'No Quotes Found')
-                    );
-                } else {
-                    include_once 'read_single.php';
-                }
-            } elseif(isset($authorId)) {
-                if(isset($categoryId)) {
-                    include_once 'read_authorAndCategory.php';
-                } else {
-                    include_once 'read_author.php';  
-                } 
-            } elseif(isset($categoryId)) {
-                include_once 'read_category.php';
+                );
+            } else {
+                include_once 'read_single.php';
+            }
+        } elseif(isset($authorId)) {
+            if(isset($categoryId)) {
+                include_once 'read_authorAndCategory.php';
+            } else {
+                include_once 'read_author.php';  
+            } 
+        } elseif(isset($categoryId)) {
+            include_once 'read_category.php';
             } else {
                 include_once 'read.php';
             }
-            break;
-        case "PUT":
-            if(!$quoteExists) {
-                echo json_encode( 
+        break;
+    case "PUT":
+        if(!$quoteExists) {
+            echo json_encode( 
                 array('message' => 'No Quotes Found')
-                );
-            } else {
-                include_once 'update.php';
-            }
-            break;
-        case "DELETE": 
-            if(!$quoteExists) {
-                echo json_encode( 
+            );
+        } else {
+            include_once 'update.php';
+        }
+        break;
+    case "DELETE": 
+        if(!$quoteExists) {
+            echo json_encode( 
                 array('message' => 'No Quotes Found')
-                );
-            } else {
+            );
+        } else {
             include_once 'delete.php';
-            }
-            break;
-    }
+        }
+        break;
+}
 
 
 

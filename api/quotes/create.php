@@ -19,7 +19,7 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
         echo json_encode( 
             array('message' => 'authorId Not Found')
         );
-    } elseif (!isValid($data->categoryId, $category)) {
+    } elseif(!isValid($data->categoryId, $category)) {
         echo json_encode( 
             array('message' => 'categoryId Not Found')
         );

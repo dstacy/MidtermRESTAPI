@@ -20,7 +20,10 @@ $db = $database->connect();
 // instantiate author object
 $category = new Category($db);
 
+// get raw JSON data
 $data = json_decode(file_get_contents("php://input"));
+
+// declare variable for isset
 $id;
 
 // get id if set
