@@ -231,8 +231,7 @@ public function read_authorAndCategory() {
         $stmt->bindParam(':categoryId', $this->categoryId);
 
         try{
-            $stmt->execute(); 
-            $this->id = $db->lastInsertId();  
+            $stmt->execute();  
         } catch(PDOException $e) {
             $message = json_encode(
                 array('message' => $e->getmessage())

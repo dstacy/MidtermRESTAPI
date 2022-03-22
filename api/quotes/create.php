@@ -37,7 +37,7 @@ if(!property_exists($data, 'quote') || !property_exists($data, 'authorId') || !p
 
     // create array for JSON data
         $quote_arr = array (
-            'id' => $quote->id, //$db->lastInsertId(),
+            'id' => $db->lastInsertId(),
             'quote' => $quote->quote,
             'authorId' => $quote->authorId,
             'categoryId' => $quote->categoryId
