@@ -29,7 +29,7 @@ class Category {
             // execute query
             $stmt->execute();
             return $stmt;
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -68,7 +68,7 @@ class Category {
             } else {
                 return false;
             }
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -93,7 +93,7 @@ class Category {
         // execute
         try{
             $stmt->execute();    
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -124,7 +124,7 @@ class Category {
         try {
             // execute
             $stmt->execute();
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );

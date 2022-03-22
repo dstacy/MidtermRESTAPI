@@ -27,7 +27,7 @@ class Author {
             // execute query
             $stmt->execute();
             return $stmt;
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -66,7 +66,7 @@ class Author {
             } else {
                 return false;
             }
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -91,7 +91,7 @@ class Author {
         // execute
         try{
             $stmt->execute();    
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -122,7 +122,7 @@ class Author {
         try {
             // execute
             $stmt->execute();
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );
@@ -148,7 +148,7 @@ class Author {
             // execute
             $stmt->execute(); 
 
-        } catch(Exception $e) {
+        } catch(PDOException $e) {
             echo json_encode(
                 array('message' => $e->getmessage())
             );

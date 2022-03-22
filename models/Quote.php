@@ -118,7 +118,7 @@ class Quote {
 
         // prepare statement
         $stmt = $this->conn->prepare($query);
-       
+        
         // bind ID
         $stmt->bindParam(1, $this->authorId);
         
@@ -256,25 +256,20 @@ class Quote {
         $this->quote = htmlspecialchars(strip_tags($this->quote));
         $this->authorId = htmlspecialchars(strip_tags($this->authorId));
         $this->categoryId = htmlspecialchars(strip_tags($this->categoryId));
-       
+    
         // bind data
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':quote', $this->quote);
         $stmt->bindParam(':authorId', $this->authorId);
         $stmt->bindParam(':categoryId', $this->categoryId);
-       
+    
         try {
             // execute
             $stmt->execute();
         } catch(PDOException $e) {
-            //$message = json_encode(
-            //    array('message' => $e->getmessage())
-            //);
             echo json_encode(
                 array('message' => $e->getmessage())
             );
-
-            // return $message;
         }
     }
 
