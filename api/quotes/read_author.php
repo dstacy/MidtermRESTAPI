@@ -6,7 +6,7 @@ $quote->authorId = $authorId;
 // get quote by authorId
 $result = $quote->read_author();
 
-   // get row count
+// get row count
 $num = $result->rowCount();
 
 // check if any quotes
@@ -30,15 +30,15 @@ if($num > 0) {
         array_push($quotes_arr, $quote_item);
     }
 
-       // convert to JSON and output
-    echo json_encode($quotes_arr);
-    return true;
+    // convert to JSON and output
+    print_r(json_encode($quotes_arr));
+    // return true;
 
 } else {
     echo json_encode(
         array('message' => 'authorId Not Found')
     );
-    return false;
+    // return false;
 }
 
 
